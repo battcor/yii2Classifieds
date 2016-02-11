@@ -60,6 +60,10 @@ class ItemController extends Controller
      */
     public function actionCreate()
     {
+        if (!\Yii::$app->user->can('createPost')) {
+            return $this->goHome();
+        }
+
         $model = new Item();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -81,6 +85,10 @@ class ItemController extends Controller
     {
         $model = $this->findModel($id);
 
+        if (!\Yii::$app->user->can('updatePost', ['item' => $model])) {
+            return $this->goHome();
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -98,7 +106,13 @@ class ItemController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+
+        if (!\Yii::$app->user->can('deletePost', ['item' => $model])) {
+            return $this->goHome();
+        }
+
+        $model->delete();
 
         return $this->redirect(['index']);
     }

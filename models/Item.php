@@ -29,6 +29,7 @@ class Item extends \yii\db\ActiveRecord
         return [
             [['title', 'description'], 'required'],
             [['description'], 'string'],
+            [['createdBy'], 'integer'],
             [['title'], 'string', 'max' => 72]
         ];
     }
@@ -42,6 +43,7 @@ class Item extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
             'description' => 'Description',
+            'createdBy' => 'Created By', 
         ];
     }
 }

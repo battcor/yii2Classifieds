@@ -31,7 +31,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             [['username', 'password'], 'required'],
-            [['username', 'password', 'authKey', 'accessToken'], 'string', 'max' => 255]
+            [['username', 'password', 'auth_key', 'access_token'], 'string', 'max' => 255]
         ];
     }
 
@@ -44,8 +44,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'id' => 'ID',
             'username' => 'Username',
             'password' => 'Password',
-            'authKey' => 'Auth Key',
-            'accessToken' => 'Access Token',
+            'auth_key' => 'Auth Key',
+            'access_token' => 'Access Token',
         ];
     }
 
@@ -91,7 +91,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      * @return string current user auth key
      */
     public function getAuthKey() {
-        return $this->authKey;
+        return $this->auth_key;
     }
 
     /**
@@ -111,5 +111,23 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function validatePassword($password)
     {
         return Yii::$app->getSecurity()->validatePassword($password, $this->password);
+    }
+
+    /**
+     * Generates password hash from password and sets it to the model
+     *
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    /**
+     * Generates "remember me" authentication key
+     */
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
     }
 }

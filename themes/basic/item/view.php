@@ -14,15 +14,22 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="col-md-9">
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?=
-        Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ])
+        <?php
+        
+        if(!Yii::$app->user->isGuest){
+            if(Yii::$app->user->can('updatePost', ['item' => $model])) {
+                echo Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
+            }
+            if(Yii::$app->user->can('deletePost', ['item' => $model])) {
+                echo Html::a('Delete', ['delete', 'id' => $model->id], [
+                    'class' => 'btn btn-danger',
+                    'data' => [
+                        'confirm' => 'Are you sure you want to delete this item?',
+                        'method' => 'post',
+                    ],
+                ]);
+            }
+        }
         ?>
     </p>
 

@@ -2,5 +2,5 @@
 
 return [
     'adminEmail' => 'admin@example.com',
-    'brandLabel' => 'Yii Classifieds',
+    'brandLabel' => 'Yii2 Classifieds',
 ];

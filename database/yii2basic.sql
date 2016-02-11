@@ -20,26 +20,28 @@ CREATE TABLE IF NOT EXISTS `item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(72) NOT NULL,
   `description` text NOT NULL,
+  `createdBy` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
--- Dumping data for table yii2basic.item: ~13 rows (approximately)
+-- Dumping data for table yii2basic.item: ~14 rows (approximately)
 DELETE FROM `item`;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
-INSERT INTO `item` (`id`, `title`, `description`) VALUES
-	(1, 'test', 'test'),
-	(2, 'test', 'test'),
-	(3, 'test', 'test'),
-	(4, 'test', 'test'),
-	(5, 'test', 'test'),
-	(6, 'test', 'test'),
-	(7, 'test', 'test'),
-	(8, 'test', 'test'),
-	(9, 'test', 'test'),
-	(10, 'test', 'test'),
-	(11, 'test', 'test'),
-	(12, 'test', 'test'),
-	(13, 'test', 'test');
+INSERT INTO `item` (`id`, `title`, `description`, `createdBy`) VALUES
+	(1, 'test', 'test', 1),
+	(2, 'test', 'test', 1),
+	(3, 'test', 'test', 1),
+	(4, 'test', 'test', 1),
+	(5, 'test', 'test', 1),
+	(6, 'test', 'test', 1),
+	(7, 'test', 'test', 1),
+	(8, 'test', 'test', 1),
+	(9, 'test', 'test', 1),
+	(10, 'test', 'test', 1),
+	(11, 'test', 'test', 1),
+	(12, 'test', 'test', 1),
+	(13, 'test', 'test', 1),
+	(14, 'created by demo', 'created by demo', 2);
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 
 
@@ -47,20 +49,22 @@ INSERT INTO `item` (`id`, `title`, `description`) VALUES
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `authKey` varchar(255) NOT NULL,
-  `accessToken` varchar(255) NOT NULL,
+  `auth_key` varchar(255) NOT NULL,
+  `access_token` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Dumping data for table yii2basic.user: ~0 rows (approximately)
+-- Dumping data for table yii2basic.user: ~4 rows (approximately)
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`id`, `username`, `password`, `authKey`, `accessToken`) VALUES
-	(1, 'admin', '$2y$13$VSOWYIJ1LzIbTEAwxcQ7WeDLZ93tidWZrUQziQuneh5ttT50Xh2UG', '????z?\n#??!????<Or5?D?W??C#?', 'ZaWpDAAhpbUA3ZoYZroYhQ5tbsXH77I2'),
-	(2, 'demo', '$2y$13$1Ns6y.siLMr9GYK257x4AeSNMQX9BX80Mr5kEBCLTX4lif9DoUO1e', '?Xv??~??m???9????O?AS?"SU?*[?p', 'XFfXfsNHbea0_dHqD5vRqZP5NBlV44kO'),
-	(3, 'guest', '$2y$13$KNHClPRjliUEHGtierQLou6bBPFS1qrsrUnFPIsAE35L6ya7HVYmO', 's{y?)_F??n????A?W{??B?9?qc?', 'cyCkH-NyWsog74WyMBNQarAmynI-H-Wo');
+INSERT INTO `user` (`id`, `username`, `email`, `password`, `auth_key`, `access_token`) VALUES
+	(1, 'admin', 'admin@test.com', '$2y$13$Pffhnu0kmLtPFh1FvsTW.uytZUcKqvzaAsyfZ2ndFIn4RDdkziBDi', 'sD5xEL4wrtp-F3p_whb6MSNuiqJZeSEw', ''),
+	(2, 'demo', 'demo@c.com', '$2y$13$5CHCppxn0zM2vk9iBFbMYecncYKDQ3kk.CZgXlw38JJWpenLa5X/C', 'OVoFXInC32MZe7WFLH_noXztCqtEl09S', ''),
+	(3, 'author', 'author@c.com', '$2y$13$IidVTWRN.mSYEpN/dv1WP.BtrSpefmiEvE9ZpAB1slqUjoD.EN.LK', 'uHIclEdJX6MWREdmGp3B_GSny9jjHpSV', ''),
+	(4, 'author2', 'author2@c.com', '$2y$13$5mknPL3RT3IHPqE01RcBD.SEKrdKqKIIVWCfEZcSi.GjRAvwF8/L2', 'nDbnqis3LKe9HwFbH7UXfi5TLndFfBce', '');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

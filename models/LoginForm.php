@@ -39,13 +39,6 @@ class LoginForm extends Model {
     public function validatePassword($attribute, $params) {
         if (!$this->hasErrors()) {
             if (!$this->_user) {
-//                $user = new User;
-//                $user->username = $this->username;
-//                $user->password = Yii::$app->security->generatePasswordHash($this->password);
-//                $user->authKey = Yii::$app->security->generateRandomKey();
-//                $user->accessToken = Yii::$app->security->generateRandomString();
-//                $user->save();
-
                 $this->_user = User::findByUsername($this->username);
             }
 

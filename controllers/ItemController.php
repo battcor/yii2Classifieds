@@ -14,6 +14,8 @@ use yii\filters\VerbFilter;
  */
 class ItemController extends Controller
 {
+    public $layout = 'main';
+
     public function behaviors()
     {
         return [
@@ -48,6 +50,8 @@ class ItemController extends Controller
      */
     public function actionView($id)
     {
+        $this-> layout = 'column1';
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -64,9 +68,14 @@ class ItemController extends Controller
             return $this->goHome();
         }
 
+        $this-> layout = 'column1';
+
         $model = new Item();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $model->load(Yii::$app->request->post());
+        $model->setAttribute('createdBy', Yii::$app->user->id);
+        
+        if ($model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -88,6 +97,8 @@ class ItemController extends Controller
         if (!\Yii::$app->user->can('updatePost', ['item' => $model])) {
             return $this->goHome();
         }
+
+        $this-> layout = 'column1';
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

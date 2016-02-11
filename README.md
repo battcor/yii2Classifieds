@@ -1,5 +1,5 @@
-# yii-classified-ads
-A Yii framework powered classifieds / listings site
+# yii2-classified-ads
+A Yii 2.0 powered classifieds / listings site
 
 
 ###### Sample login credentials
